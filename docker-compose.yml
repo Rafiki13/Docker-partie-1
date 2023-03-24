@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+  httpd:
+    image: php:8.2-apache
+    container_name: httpd-${NOM_PROJET}
+    restart: always
+    volumes:
+      - ./web/html:/var/www/html
+    ports:
+      - "8180:80"
+
+  postgres:
+    image: postgis/postgis
+    container_name: postgres-${NOM_PROJET}
+    restart: always
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "8181:5432"
+    environment:
+      POSTGRES_PASSWORD: ${MDP_POSTGRES}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${USER_POSTGRES}
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-${NOM_PROJET}
+    restart: always
+    ports:
+      - "8182:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${EMAIL_PGADMIN}
+      PGADMIN_DEFAULT_PASSWORD: ${MDP_PGADMIN}
+
+  minetest:
+    image: linuxserver/minetest
+    container_name: minetest-${NOM_PROJET}
+    restart: always
+    ports:
+      - "25565:30000/udp"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - CLI_ARGS=--gameid minetest --port 30000 #optional
