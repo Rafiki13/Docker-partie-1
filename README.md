@@ -10,11 +10,20 @@ Voici la liste des serveurs :
 - Minetest (port 25565)
 
 # Prérequis
-Avant de pouvoir lancer le conteneur, vous devez installer Docker ainsi que 
+Avant de pouvoir lancer le conteneur, vous devez installer Docker ainsi que
 [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 
+Vous devrez installer les images nécessaires dans notre `docker-compose`.<br/>
+Les images sont les suivantes :
+- `php:8.2-apache`
+- `postgis/postgis`
+- `dpage/pgadmin4`
+- `linuxserver/minetest`
+
 # Configuration
-Vous retrouverez un fichier d'environnement `.env` à la racine du dépôt.<br/>
+Dans notre fichier `docker-compose`, nous utilisons des variables configurées dans un fichier d'environnement. Ces variables servent à configurer les comptes des
+différentes applications déployées, ou encore les noms des conteneurs.
+Vous retrouverez ce fichier d'environnement `.env` à la racine du dépôt.<br/>
 Vous pourrez ainsi personnaliser les éléments suivants :
 
 | Nom variables | Description                                                       |
