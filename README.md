@@ -35,3 +35,13 @@ Puis, il ne reste plus qu'à démarrer les conteneurs :
 ```shell
 docker compose up -d
 ```
+# Détails du docker
+## Volumes
+Un premier volume a été créé afin de garder les données de la base de données
+persistentes.
+Un second volume s'occupe de rendre accessible les fichiers du site au serveur
+web. Ainsi, toute modification dans le dossier `web/html` se répercutent directement
+sur le serveur web.
+## Networks
+Un réseau propre au projet a été créé avec pour driver bridge. Celui-ci fait le
+lien entre les différents conteneurs afin qu'ils puissent communiquer.
