@@ -8,6 +8,8 @@ services:
       - ./web/html:/var/www/html
     ports:
       - "8180:80"
+    networks:
+      - tp
 
   postgres:
     image: postgis/postgis
@@ -21,6 +23,8 @@ services:
       POSTGRES_PASSWORD: ${MDP_POSTGRES}
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${USER_POSTGRES}
+    networks:
+      - tp
 
   pgadmin:
     image: dpage/pgadmin4
@@ -31,6 +35,8 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${EMAIL_PGADMIN}
       PGADMIN_DEFAULT_PASSWORD: ${MDP_PGADMIN}
+    networks:
+      - tp
 
   minetest:
     image: linuxserver/minetest
@@ -43,3 +49,7 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
       - CLI_ARGS=--gameid minetest --port 30000 #optional
+
+networks:
+  tp:
+    driver: bridge
